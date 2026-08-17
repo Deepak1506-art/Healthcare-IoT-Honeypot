@@ -1,1 +1,5 @@
 .streamlit/secrets.toml
+dashboard/__pycache__/
+dashboard/app_backup.py
+dashboard/app_before_fix.py
+dashboard/app_old.py
