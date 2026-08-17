@@ -378,18 +378,28 @@ if search.strip():
                     else "No usernames captured"
                 )
 
-                st.markdown(
-                    f"""
-                    <div class="result-card">
-                    <b>Usernames Attempted</b><br>
-                    {username_text}<br><br>
+                st.markdown("**Usernames Attempted**")
+                st.write(username_text)
 
-                    <b>Most Common Events</b><br>
-                    {events.head(5).to_string()}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                st.markdown("**Most Common Events**")
+
+                if not events.empty:
+                    event_display = (
+                        events.head(5)
+                        .rename("Attempts")
+                        .reset_index()
+                    )
+
+                    event_display.columns = ["Event", "Attempts"]
+
+                    st.dataframe(
+                        event_display,
+                        use_container_width=True,
+                        hide_index=True
+                    )
+
+                else:
+                    st.write("No events recorded.")
 
             # Timeline
             st.markdown("### 📈 Attacker Activity Timeline")
